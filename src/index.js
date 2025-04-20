@@ -72,7 +72,6 @@ app.get('/cocina/heladera/:tipoBebida', (request, response) => {
 
 
   // Método POST para agregar productos a la alacena
-
   app.post('/cocina/alacena', (request, response) => {
     const {nombre, cantidad} = request.body;     // recupero del body lo que pasa como parámetros
 
@@ -154,7 +153,7 @@ app.get('/cocina/heladera/:tipoBebida', (request, response) => {
 )
 
 // Método PATCH para modificar productos en la alacena
-// Este método requiere el suministro de un producto como parámetro y la cantidad que se desea agregar o restar.
+// Este método requiere el suministro de un producto como parámetro y la cantidad que se desea agregar o restar al stock.
 app.patch('/cocina/alacena/:producto', (request, response) => {
   // Lectura de parámetros
   const {producto} = request.params;
@@ -203,6 +202,37 @@ app.patch('/cocina/alacena/:producto', (request, response) => {
 
 }
 );
+
+// Método DELETE para eliminar productos en la alacena
+// Requiere de un parámetro (de ruta) para hacer la eliminación.
+app.delete('/cocina/alacena/:producto', (request,response) => {
+  const {producto}=request.params;
+
+  // Buscar al producto en el array alacena
+  const index=alacena.findIndex( i => i.nombre.toLowerCase()===producto.toLowerCase());
+
+  // Si no lo encuentra
+  if (index===-1) {
+    return response.status(404).json(
+      {
+        error: `El producto "${producto}" no se encuentra en la alacena.`
+      }
+    )
+  } ;
+
+  // Si lo encuentra, elimina el producto del array
+  // Antes de eliminar, me guardo el nombre para luego mostrarlo
+  const eliminado=alacena[index].nombre;
+
+  // Ahora sí, elimino el producto
+  response.json(
+    {
+      mensaje: `El producto ${eliminado} fue eliminado de la alacena.`,
+      producto: eliminado
+    }
+  );
+});
+
 
 
 
