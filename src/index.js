@@ -234,8 +234,7 @@ app.delete('/cocina/alacena/:producto', (request,response) => {
 });
 
 
-
-
+// Inicio del servidor
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`La aplicación está escuchando el puerto ${port}`);
 });
