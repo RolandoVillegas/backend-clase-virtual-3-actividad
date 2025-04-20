@@ -236,7 +236,7 @@ app.delete('/cocina/alacena/:producto', (request,response) => {
   const index=alacena.findIndex( i => i.nombre.toLowerCase()===producto.toLowerCase());
 
   // Si no lo encuentra
-  if (index===-1) {
+  if (index === -1) {
     return response.status(404).json(
       {
         error: `El producto "${producto}" no se encuentra en la alacena.`
@@ -249,6 +249,7 @@ app.delete('/cocina/alacena/:producto', (request,response) => {
   const eliminado=alacena[index].nombre;
 
   // Ahora sí, elimino el producto
+  alacena.splice(index, 1);
   response.json(
     {
       mensaje: `El producto ${eliminado} fue eliminado de la alacena.`,
