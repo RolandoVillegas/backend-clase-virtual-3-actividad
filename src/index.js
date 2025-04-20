@@ -1,3 +1,27 @@
+/*
+  Materia:  Programación Backend
+  Alumno:   Rolando Villegas
+  Fecha:    20/04/2025
+
+  Clase virtual 3 - Actividad
+
+  Descripción:
+
+  Al programa hecho en clase, le agregué un endpoint /cocina/alacena para practicar las operaciones
+  de alta, baja, modificación y lectura, que luego ejecutaré con Postman.
+
+  El nuevo endpoint sigue esta lógica:
+
+  a)  El endpoint /cocina/alacena representa la alacena de una cocina, donde se pueden almacenar productos
+      como latas de conservas, fideos, platos, etc.
+  b)  Los productos se guardan en un array llamado "alacena", que registra el nombre del producto y su cantidad.
+  c)  Se utilizan los métodos GET, POST, PATCH, PUT y DELETE para hacer las operaciones básicas de un CRUD.
+  d)  Los métodos utilizan (los que lo requieren) parámetros del tipo path (ej.: DELETE) y body (ej: PUT).
+  
+  Los métodos del endpoint /cocina/alacena los escribí a continuación de lo visto en clase, a partir de la línea 70.
+*/
+
+// Inicialización de Express
 import express from 'express';
 
 const app = express();
@@ -44,7 +68,7 @@ app.get('/cocina/heladera/:tipoBebida', (request, response) => {
   );
 });
 
-// Métodos para alacena
+// INICIO DE MÉTODOS PARA endpoint /cocina/alacena
 
   // Método GET para listar los productos que tiene la alacena.
   app.get('/cocina/alacena', (request, response) => {
@@ -232,9 +256,9 @@ app.delete('/cocina/alacena/:producto', (request,response) => {
     }
   );
 });
+// FIN DE MÉTODOS PARA /cocina/alacena
 
-
-// Inicio del servidor
+// Arranque del servidor
 app.listen(port, () => {
   console.log(`La aplicación está escuchando el puerto ${port}`);
 });
